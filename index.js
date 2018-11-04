@@ -17,6 +17,10 @@ function getCustomer(ws, entityName) {
       .then(json => console.log(JSON.stringify(json)));
 }
 
+app.post('/webhook' function(req, res) {
+  const { body } = req.body;
+});
+
 app.post('/customer', function(req, res) {
   const { clientName } = 'cool cars'; //req.body;
   console.log(`Client name is ${clientName}.`);
