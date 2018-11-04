@@ -32,6 +32,10 @@ app.post('/webhook', function(req, res) {
   if (action === 'createinvoice.clientName') {
     const { clientName } = body.queryResult.parameters;
     getCustomer(res, clientName);
+  } else if (action === 'createinvoice.amount') {
+    invoiceData.amount = body.queryResult.parameters;
+    let reply = "Got it. Anything else?";
+    res.send(JSON.stringify({fulfillmentText : reply}));
   }
 });
 
