@@ -19,7 +19,7 @@ function getCustomer(ws, entityName) {
 
 app.post('/webhook', function(req, res) {
   const { body } = req.body;
-  console.log(body);
+  console.log(req);
 });
 
 app.post('/customer', function(req, res) {
