@@ -33,24 +33,25 @@ function invoiceCreateAndSend(res) {
 }
 
 function createInvoice(res) {
-  fetch('https://sandbox-quickbooks.api.intuit.com/v3/company/123146162820179/invoice?minorversion=30', {
-    method: 'post',
-    body: JSON.stringify({"Line": [
+  let body = {"Line": [
       {
         "Amount": invoiceData.amount,
         "DetailType": "SalesItemLineDetail",
-        "SalesItemLineDetail": {
-          "ItemRef": {
-            "value": "1",
-            "name": "Services"
-          }
-        }
+        "SalesItemLineDetail": {}
       }
     ],
     "CustomerRef": {
       "value": invoiceData.clientId
     }
-  }),
+  };
+
+  if (invoiceData.description) {
+    body.Line[0].Description = invoiceData.description;
+  }
+
+  fetch('https://sandbox-quickbooks.api.intuit.com/v3/company/123146162820179/invoice?minorversion=30', {
+    method: 'post',
+    body: JSON.stringify(body),
     headers: { 'Content-Type': 'application/json', "Accept": "application/json", "Authorization": "bearer " + token }})
     .then(res => res.json())
     .then(function(json) {
@@ -83,8 +84,12 @@ app.post('/webhook', function(req, res) {
     getCustomer(res, clientName);
   } else if (action === 'createinvoice.amount') {
     invoiceData.amount = body.queryResult.parameters.amount;
-    console.log(`amount: ${JSON.stringify(invoiceData.amount)}`)
+    console.log(`amount: ${invoiceData.amount}`);
     let reply = "Got it. Anything else?";
+    res.send(JSON.stringify({fulfillmentText : reply}));
+  } else if (action === 'createinvoice.description') {
+    invoiceData.description = body.queryResult.parameters.description;
+    let reply = "Description added. Anything else?";
     res.send(JSON.stringify({fulfillmentText : reply}));
   } else if (action === 'createinvoice.send') {
     invoiceCreateAndSend(res);
