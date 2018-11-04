@@ -34,7 +34,22 @@ function invoiceCreateAndSend(res) {
 function createInvoice(res) {
   fetch('https://sandbox-quickbooks.api.intuit.com/v3/company/123146162820179/invoice?minorversion=30', {
     method: 'post',
-    body: JSON.stringify({Line:[{Amount: invoiceData.amount, DetailType: 'SalesItemLineDetail', SalesItemLineDetail: {}}], CustomerRef: {value: invoiceData.clientId}}),
+    body: JSON.stringify({"Line": [
+      {
+        "Amount": invoiceData.amount,
+        "DetailType": "SalesItemLineDetail",
+        "SalesItemLineDetail": {
+          "ItemRef": {
+            "value": "1",
+            "name": "Services"
+          }
+        }
+      }
+    ],
+    "CustomerRef": {
+      "value": invoiceData.clientId;
+    }
+  }),
     headers: { 'Content-Type': 'application/json', "Accept": "application/json", "Authorization": "bearer " + token }})
     .then(res => res.json())
     .then(function(json) {
