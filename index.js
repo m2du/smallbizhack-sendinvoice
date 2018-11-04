@@ -1,6 +1,7 @@
 const app = require('express')();
 const bodyParser = require('body-parser');
 const http = require('http');
+const token = 'eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiZGlyIn0..AAiEJ8cyfagrHf4BtFek5Q.OnFqMiZQ3LJiGPCjLNEh6lpxSdPnUnOLPTbVXJZL4TRe7SKqCxFT2sZkSbs--8BUsZ2IrjoFnQO7ryMr2vJLqydtMXJSvwjt7Ad3-Itc45aeYlnXqQXjp_99DBrUu7GiVVB1OspIhdwd3uYm0bsqAm9c_aLOnngdkwnsq-Jdd9RepOiAhD1EhVFCiwL1u4gYQ1HJKZ8kjE1cdPe6vRgsyCM6KcfFkyS6gINTE7u6NTLbqP4wn7XxoDwH3yDqeQ1c6SBYUmMiLOdRjR68OYQu9pAkYFjhW9mIukfydmFi3IKXcQNdqk90ENVDk9OyGHVapWGypTD5-5VIGS2eA5IrOOftNiLzk_4iVSp_a83srb24jd-70xWSoJAUNwLAAYLUROuiTQ-L1UL4MD8gFbmKq3fRayVp-MNiWk6lEWKsAiH4pnZL9IEOeOMbX1UoVBsCkCqRN9EKAMosFBXYUCYTTbr7OINKtPwUUKzwBOcyt2TnP7bQ2Q7F6X85TN58jVgi6aM_UdB0fqIKNjVwQ-B0F4_RkvXCVCmTImPkWcEaq0VFHBrZE7AuL_GtrpSAqvmhzPbtAD-8h20j1Ap-kxy7cWK27s3ZnJPuTxAdFc6W-Nqwgf60Rjt-_flhiA7ia98f4qNs6_OJFR853Y3IEC3WlHGfD7x0hXMOUjSfHHRkpkweIHelMji8PR-k8-4AReEQdoBI_Ks3xFvHOCkLft3steSeVkZuq1d58uJ8i8Ob6Ps.J_JQv5Ao7OwJWxoCJEcvZA';
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -15,7 +16,7 @@ function getCustomer(res, clientName) {
           body:    `select * from Customer where CompanyName = '${clientName}'`,
           headers: { 'Content-Type': 'application/text',
                      "Accept": "application/json",
-                     "Authorization": "bearer eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiZGlyIn0..94hQS6Rtl0CcbBgIikwwyQ.snFCOH_Opgidk8u_M9f1jlMOE3jHKpCp6v2HI_KmLteTda6DQNPEi4gJ0ApvxUpjrifpfrXpuaJTC_4WC6BWdZtxKICBS4I2BFImhsnsE8ZOi3iI-y8V-NcCLRd-ELLElYQi9n86Pu06xwl1TrkQv4esH5FBjqs5T9GaEB91NmzSmZqYjSEkwC79cBXdR-VWvJwbDJn3TRg8mqBSw3BFQIPkklBTGB5vHx1U-77vjEzNC2J1p_zwBZpfwjlgad5sdhRYFteA6Z8ZA6SxNtI6CjxAcHMMEOjzbqEyeJLFsMsX9gHtKZRJlchsD5M0dWqqBQ9M9h1HVKXGV127pcH-lzjFOJ9XRqOJwqsW8nwWg7RtCXMwVysBiKCTDT5BhhetCR6vg9CE8B-1Yh0EImhUTEllFoYx7RR4Xl1prdtjY4SVGdgEIOPo8AVv-2n5qjjb9R3YzcIIMypMUsCEHyxGAmep099HKv-pFa6L6qxUK5sEj1mm4GHDQUiRAOHSI3KoNgRh3-fhV7lSrpv1yjGBFXmy2dmEswfBliTdnBCoIstg47Wu-4J8LMi-A0E1K5USwR8FTkTeqz1F6g6jREYiyzFN2LBLwl_zfSbMp14WO-1MKnvuGbcVpsNf8tIlsbOvnBIoy7dJ475ChsJwwYX0ujahTHDUReluKMY3QYAoRdyYnNYxHO9O60yh_Dhi9IppX6__KFhHf-D5C6xb_lQPEpW1e4mdM3q-TAtt1xYDqlA.EG8WCF6kxtwoVdLP4tnZ2Q" }}).then(res => res.json())
+                     "Authorization": "bearer " + token }}).then(res => res.json())
       .then(function(json) {
         console.log(json.QueryResponse);
         const client = json.QueryResponse.Customer[0];
@@ -37,7 +38,7 @@ function createInvoice(res) {
     CustomerRef: {value: invoiceData.clientId}}),
     headers: { 'Content-Type': 'application/json',
     "Accept": "application/json",
-    "Authorization": "bearer eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiZGlyIn0..94hQS6Rtl0CcbBgIikwwyQ.snFCOH_Opgidk8u_M9f1jlMOE3jHKpCp6v2HI_KmLteTda6DQNPEi4gJ0ApvxUpjrifpfrXpuaJTC_4WC6BWdZtxKICBS4I2BFImhsnsE8ZOi3iI-y8V-NcCLRd-ELLElYQi9n86Pu06xwl1TrkQv4esH5FBjqs5T9GaEB91NmzSmZqYjSEkwC79cBXdR-VWvJwbDJn3TRg8mqBSw3BFQIPkklBTGB5vHx1U-77vjEzNC2J1p_zwBZpfwjlgad5sdhRYFteA6Z8ZA6SxNtI6CjxAcHMMEOjzbqEyeJLFsMsX9gHtKZRJlchsD5M0dWqqBQ9M9h1HVKXGV127pcH-lzjFOJ9XRqOJwqsW8nwWg7RtCXMwVysBiKCTDT5BhhetCR6vg9CE8B-1Yh0EImhUTEllFoYx7RR4Xl1prdtjY4SVGdgEIOPo8AVv-2n5qjjb9R3YzcIIMypMUsCEHyxGAmep099HKv-pFa6L6qxUK5sEj1mm4GHDQUiRAOHSI3KoNgRh3-fhV7lSrpv1yjGBFXmy2dmEswfBliTdnBCoIstg47Wu-4J8LMi-A0E1K5USwR8FTkTeqz1F6g6jREYiyzFN2LBLwl_zfSbMp14WO-1MKnvuGbcVpsNf8tIlsbOvnBIoy7dJ475ChsJwwYX0ujahTHDUReluKMY3QYAoRdyYnNYxHO9O60yh_Dhi9IppX6__KFhHf-D5C6xb_lQPEpW1e4mdM3q-TAtt1xYDqlA.EG8WCF6kxtwoVdLP4tnZ2Q" }}).then(res => res.json())
+    "Authorization": "bearer " + token }}).then(res => res.json())
     .then(function(json) {
       console.log('Invoice created');
       console.log(json);
@@ -50,7 +51,7 @@ function sendInvoice(res, invoiceId) {
     method: 'post',
     headers: { 'Content-Type': 'application/json',
     "Accept": "application/json",
-    "Authorization": "bearer eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiZGlyIn0..94hQS6Rtl0CcbBgIikwwyQ.snFCOH_Opgidk8u_M9f1jlMOE3jHKpCp6v2HI_KmLteTda6DQNPEi4gJ0ApvxUpjrifpfrXpuaJTC_4WC6BWdZtxKICBS4I2BFImhsnsE8ZOi3iI-y8V-NcCLRd-ELLElYQi9n86Pu06xwl1TrkQv4esH5FBjqs5T9GaEB91NmzSmZqYjSEkwC79cBXdR-VWvJwbDJn3TRg8mqBSw3BFQIPkklBTGB5vHx1U-77vjEzNC2J1p_zwBZpfwjlgad5sdhRYFteA6Z8ZA6SxNtI6CjxAcHMMEOjzbqEyeJLFsMsX9gHtKZRJlchsD5M0dWqqBQ9M9h1HVKXGV127pcH-lzjFOJ9XRqOJwqsW8nwWg7RtCXMwVysBiKCTDT5BhhetCR6vg9CE8B-1Yh0EImhUTEllFoYx7RR4Xl1prdtjY4SVGdgEIOPo8AVv-2n5qjjb9R3YzcIIMypMUsCEHyxGAmep099HKv-pFa6L6qxUK5sEj1mm4GHDQUiRAOHSI3KoNgRh3-fhV7lSrpv1yjGBFXmy2dmEswfBliTdnBCoIstg47Wu-4J8LMi-A0E1K5USwR8FTkTeqz1F6g6jREYiyzFN2LBLwl_zfSbMp14WO-1MKnvuGbcVpsNf8tIlsbOvnBIoy7dJ475ChsJwwYX0ujahTHDUReluKMY3QYAoRdyYnNYxHO9O60yh_Dhi9IppX6__KFhHf-D5C6xb_lQPEpW1e4mdM3q-TAtt1xYDqlA.EG8WCF6kxtwoVdLP4tnZ2Q" }}).then(res => res.json())
+    "Authorization": "bearer " + token }}).then(res => res.json())
     .then(function(json) {
       console.log('Invoice sent');
       let reply = "Invoice sent.";
