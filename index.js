@@ -47,7 +47,7 @@ function createInvoice(res) {
       }
     ],
     "CustomerRef": {
-      "value": invoiceData.clientId;
+      "value": invoiceData.clientId
     }
   }),
     headers: { 'Content-Type': 'application/json', "Accept": "application/json", "Authorization": "bearer " + token }})
