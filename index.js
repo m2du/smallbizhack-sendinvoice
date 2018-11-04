@@ -32,6 +32,7 @@ app.post('/webhook', function(req, res) {
   console.log(`Action: ${action}`);
   if (action === 'createinvoice.clientName') {
     const { clientName } = body.queryResult.parameters;
+    console.log(`clientName: ${clientName}`);
     getCustomer(res, clientName);
   } else if (action === 'createinvoice.amount') {
     invoiceData.amount = body.queryResult.parameters;
