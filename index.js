@@ -29,7 +29,7 @@ app.post('/webhook', function(req, res) {
   const { body } = req;
   const { action } = body.queryResult;
   console.log(`Action: ${action}`);
-  if (action === 'CreateInvoice.CreateInvoice-custom') {
+  if (action === 'createinvoice.clientName') {
     const { clientName } = body.queryResult.parameters;
     getCustomer(res, clientName);
   }
