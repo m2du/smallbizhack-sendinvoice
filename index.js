@@ -61,7 +61,7 @@ function createInvoice(res) {
 }
 
 function sendInvoice(res, invoiceId) {
-  fetch(`https://sandbox-quickbooks.api.intuit.com/v3/company/123146162820179/invoice/${invoiceId}/send?sendTo=${invoiceData.email}`, {
+  fetch(`https://sandbox-quickbooks.api.intuit.com/v3/company/123146162820179/invoice/${invoiceId}/send?sendTo=tedbrink29@gmail.com`, {
     method: 'post',
     headers: { 'Content-Type': 'application/json',
     "Accept": "application/json",
