@@ -18,8 +18,8 @@ function getCustomer(ws, entityName) {
 }
 
 app.post('/webhook', function(req, res) {
-  const { body } = req.body;
-  console.log(req);
+  const { body } = req;
+  console.log(body);
 });
 
 app.post('/customer', function(req, res) {
