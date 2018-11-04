@@ -22,6 +22,7 @@ function getCustomer(res, clientName) {
         const client = json.QueryResponse.Customer[0];
         invoiceData.clientId = client.Id;
         invoiceData.email = client.PrimaryEmailAddr.Address;
+        console.log(`clientEmail: ${invoiceData.email}`);
         let reply = "Customer found! What is the payment amount?";
         res.send(JSON.stringify({fulfillmentText : reply}));
       });
