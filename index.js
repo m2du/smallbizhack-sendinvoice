@@ -27,9 +27,12 @@ function getCustomer(res, clientName) {
 
 app.post('/webhook', function(req, res) {
   const { body } = req;
-  console.log(body);
-  const { clientName } = body.queryResult.parameters;
-  getCustomer(res, clientName);
+  const { action } = body.queryResult;
+  console.log(`Action: ${action}`);
+  if (action === 'CreateInvoice.CreateInvoice-custom') {
+    const { clientName } = body.queryResult.parameters;
+    getCustomer(res, clientName);
+  }
 });
 
 app.post('/customer', function(req, res) {
