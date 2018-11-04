@@ -40,6 +40,7 @@ function createInvoice(res) {
     "Authorization": "bearer eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiZGlyIn0..94hQS6Rtl0CcbBgIikwwyQ.snFCOH_Opgidk8u_M9f1jlMOE3jHKpCp6v2HI_KmLteTda6DQNPEi4gJ0ApvxUpjrifpfrXpuaJTC_4WC6BWdZtxKICBS4I2BFImhsnsE8ZOi3iI-y8V-NcCLRd-ELLElYQi9n86Pu06xwl1TrkQv4esH5FBjqs5T9GaEB91NmzSmZqYjSEkwC79cBXdR-VWvJwbDJn3TRg8mqBSw3BFQIPkklBTGB5vHx1U-77vjEzNC2J1p_zwBZpfwjlgad5sdhRYFteA6Z8ZA6SxNtI6CjxAcHMMEOjzbqEyeJLFsMsX9gHtKZRJlchsD5M0dWqqBQ9M9h1HVKXGV127pcH-lzjFOJ9XRqOJwqsW8nwWg7RtCXMwVysBiKCTDT5BhhetCR6vg9CE8B-1Yh0EImhUTEllFoYx7RR4Xl1prdtjY4SVGdgEIOPo8AVv-2n5qjjb9R3YzcIIMypMUsCEHyxGAmep099HKv-pFa6L6qxUK5sEj1mm4GHDQUiRAOHSI3KoNgRh3-fhV7lSrpv1yjGBFXmy2dmEswfBliTdnBCoIstg47Wu-4J8LMi-A0E1K5USwR8FTkTeqz1F6g6jREYiyzFN2LBLwl_zfSbMp14WO-1MKnvuGbcVpsNf8tIlsbOvnBIoy7dJ475ChsJwwYX0ujahTHDUReluKMY3QYAoRdyYnNYxHO9O60yh_Dhi9IppX6__KFhHf-D5C6xb_lQPEpW1e4mdM3q-TAtt1xYDqlA.EG8WCF6kxtwoVdLP4tnZ2Q" }}).then(res => res.json())
     .then(function(json) {
       console.log('Invoice created');
+      console.log(json.QueryResponse);
       sendInvoice(res, json.Invoice.Id);
   });
 }
@@ -59,7 +60,6 @@ function sendInvoice(res, invoiceId) {
 
 app.post('/webhook', function(req, res) {
   const { body } = req;
-  console.log(body);
   const action = body.queryResult.action;
   console.log(`Action: ${action}`);
   if (action === 'createinvoice.clientName') {
