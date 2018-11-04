@@ -2,6 +2,7 @@ const WebSocket = require('ws');
 const wss = new WebSocket.Server({ port: 8080 });
 
 wss.on('connection', ws => {
+  console.log('Websocket listening...');
   ws.on('message', message => {
     json = JSON.parse(message);
     if (json.type === 'getCustomer') {
