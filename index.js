@@ -82,7 +82,7 @@ app.post('/webhook', function(req, res) {
     getCustomer(res, clientName);
   } else if (action === 'createinvoice.amount') {
     invoiceData.amount = body.queryResult.parameters.amount;
-    console.log(`amount: ${invoiceData.amount}`)
+    console.log(`amount: ${JSON.stringify(invoiceData.amount)}`)
     let reply = "Got it. Anything else?";
     res.send(JSON.stringify({fulfillmentText : reply}));
   } else if (action === 'createinvoice.send') {
