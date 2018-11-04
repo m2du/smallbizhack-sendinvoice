@@ -21,3 +21,10 @@ app.post('/customer', function(req, res) {
   const { clientName } = req.body;
   console.log(`Client name is ${clientName}.`);
 });
+
+// server config
+app.set('port', process.env.PORT || 3000);
+
+http.createServer(app).listen(app.get('port'), function(){
+  console.log('Express server listening on port ' + app.get('port'));
+});
