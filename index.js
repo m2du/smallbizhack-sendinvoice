@@ -19,7 +19,7 @@ function getCustomer(clientName) {
 
 app.post('/webhook', function(req, res) {
   const { body } = req;
-  const { clientName } = body.parameters;
+  const { clientName } = body.queryResult.parameters;
   getCustomer(clientName);
 });
 
