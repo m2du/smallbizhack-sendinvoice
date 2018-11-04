@@ -18,8 +18,9 @@ function getCustomer(ws, entityName) {
 }
 
 app.post('/customer', function(req, res) {
-  const { clientName } = req.body;
+  const { clientName } = 'cool cars'; //req.body;
   console.log(`Client name is ${clientName}.`);
+  res.send(`Client name is ${clientName}.`);
 });
 
 // server config
