@@ -14,7 +14,12 @@ function getCustomer(clientName) {
           headers: { 'Content-Type': 'application/text',
                      "Accept": "application/json",
                      "Authorization": "bearer eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiZGlyIn0..i2s3YTaQ3EIEhQR5Q2fpHw.0vdQ0xqVSYWQaGG7p3sPfNTGGAa6sMzw3UnkhwqYCBolP4FfTvOESJ15RESZiRIBNMajI6fFucnpIbWcJqyHmz9JmvSJdBxi2Sc9daJZ5ozBSMNUFyM6WrGfS2a-7IOj51Fclwfshp7lrk-wWCgcLpFV6qpLPkcteUhtmb7UDIUedcZUpn9jK5Rd82WBNx6DulBNthwCx7ZKwAD1yRAAn5XhLhz1aGR4x2SUTqWuERY6FRvHFMSjbKza6AF8G6MjobjmPx4LbFoi7NvdquWSvaMnR4pxldF-95HMLeP9tjK8ROd2DxB7DIgWzB7r9LINvLO2dCPDUhalP6T7A7tlTqNmjiPpBTloLsygajxbkp1--XeyF5x8dL6GxEVF94JwKnBj1rtZAqAULKjaPOBB-QJb1X7l1mAe5MuxinWWE-Nm2LH6fNCzEFVjZnUSTyIY2xf8bMWqrn-0TSsggN50wnzUcyKehADvToYUeOd4UGXWvbXxYtPBaeeuXLtMkB1_byo_BOUpwK5YtFhH4X8r6etMdlJHK72L6kgfF83rGL3xnXX6S8oehDBvZ-imoM5kOy7r2Z81MVwBssXPN5viOZWoOOIzW1iJvZxcSoqYk1pwICumjtgM-mKiVRCEgTxnQxGrfvm1Xb2Jy4PSRqBcDYZ7vD_NsKx-C_DU-2wkqnoahDazkUzCLgKDEjrN74TewxGRjeZhqYyGyzZjaLlR0hj-8OmZFraAvrfDMS1gTPw.7qDPknkV9iC4yYWw1JXuIw" }}).then(res => res.json())
-      .then(json => console.log(JSON.stringify(json)));
+      .then(function(json) {
+        const client = json.QueryResponse.Customer[0];
+        console.log(client);
+        const email = client.PrimaryEmailAddr;
+        console.log(email);
+      });
 }
 
 app.post('/webhook', function(req, res) {
