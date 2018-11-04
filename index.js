@@ -36,7 +36,7 @@ function createInvoice(res) {
     method: 'post',
     body: JSON.stringify({"Line": [
       {
-        "Amount": 500.00,
+        "Amount": invoiceData.amount,
         "DetailType": "SalesItemLineDetail",
         "SalesItemLineDetail": {
           "ItemRef": {
