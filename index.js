@@ -37,7 +37,12 @@ function createInvoice(res) {
       {
         "Amount": invoiceData.amount,
         "DetailType": "SalesItemLineDetail",
-        "SalesItemLineDetail": {}
+        "SalesItemLineDetail": {
+          "ItemRef": {
+            "value": "1",
+            "name": "Services"
+          }
+        }
       }
     ],
     "CustomerRef": {
