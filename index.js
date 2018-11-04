@@ -9,7 +9,7 @@ const fetch = require('node-fetch');
 
 let invoiceData = {};
 
-function getCustomer(clientName) {
+function getCustomer(res, clientName) {
   fetch('https://sandbox-quickbooks.api.intuit.com/v3/company/123146162820179/query?minorversion=30', {
           method: 'post',
           body:    `select * from Customer where CompanyName = '${clientName}'`,
@@ -20,16 +20,15 @@ function getCustomer(clientName) {
         const client = json.QueryResponse.Customer[0];
         invoiceData.clientId = client.Id;
         invoiceData.email = client.PrimaryEmailAddr.Address;
-        return "Customer found! What is the payment amount?";
+        let reply = "Customer found! What is the payment amount?";
+        res.send(JSON.stringify({fulfillmentText : reply}));
       });
 }
 
 app.post('/webhook', function(req, res) {
   const { body } = req;
   const { clientName } = body.queryResult.parameters;
-  let reply = getCustomer(clientName);
-  console.log(reply);
-  res.send(JSON.stringify({fulfillmentText : reply}));
+  getCustomer(res, clientName);
 });
 
 app.post('/customer', function(req, res) {
