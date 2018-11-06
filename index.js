@@ -1,7 +1,7 @@
 const app = require('express')();
 const bodyParser = require('body-parser');
 const http = require('http');
-const token = 'eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiZGlyIn0..QVyP-VeyK1osGRFx33o1Qg.sPk2wVd3daHalKNaZYrhG0PQHl1qubxRwWUMfutZsOmEFr5fD-PCVs_5lxR-zOn-Wt955hwvQxU9m1XWP6aeXF5PByypTjynFOL8oQjf50gGzkndrmb7_Mks3EtQ7DuvRXjh7N8EC-ae-Pr5HKX93kG8DX1IxZbn7zg98IUJL_Wt5Ita7soQUjq7gmJEhkoBPyPXKXpA8ysag_s20FuNJ8PsBQR_1RGQFtFIfrFLfcxN3pBljVIIlrRIAoljp5sgEWbBc60tFE5xvEP4uVs_i69nNAx6qn4k0hPKO26VZrgqcQA1mQMfcpDbTssZXKBa5gveybYqo1gQ_X0-UfE9OsyXq0OPbJWoakWzuGyRN5Ggru5m7phSQQyDMlFQ0pzI48IartoII20qEa4D3aw-lVLyPgc9ZulAAX5rsfBp8jokTMNAc_jv47F4q4_LpkZAnZsMOAraVhlEXN25Pfgh2y74Jg-8O4JFvRy8pm46G0Jz0rX11ARbuBx69QsLXjOynqBCBbGYLEv0wnAL-ngGXq_ps9i4mh6gfflZBTnQJ3RWpixUXOv9z3OQm_eSDzMD5eQyaJVeMEEsldpO8Usm9I1lwsm6TWY5xlqnuO1stHFws9Q81aWqc_rLkjhEpWoWjbMr2FPpE790XDHJ3h8y_gxdNUp1UH-IcOgSqI4dhLwm92Gg0cqKGjYck3JAxoK7ycLT8jqr9MDzLenDkL5DL0_e-XKKmDRwMFlt0eOU6rI.2hXBX3z-GmijXhe6Dwfb5g';
+const token = 'INSERT TOKEN HERE';
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -67,7 +67,7 @@ function createInvoice(res) {
 }
 
 function sendInvoice(res, invoiceId) {
-  fetch(`https://sandbox-quickbooks.api.intuit.com/v3/company/123146162820179/invoice/${invoiceId}/send?sendTo=tedbrink29@gmail.com`, {
+  fetch(`https://sandbox-quickbooks.api.intuit.com/v3/company/123146162820179/invoice/${invoiceId}/send?sendTo=${invoiceData.email}`, {
     method: 'post',
     headers: { 'Content-Type': 'application/octet-stream',
     "Accept": "application/json",
